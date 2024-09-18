@@ -18,12 +18,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18'
           
       - name: Release to GitHub
         uses: cycjimmy/semantic-release-action@v4
         with:
-          semantic_version: 24.1.1
+          semantic_version: 20
           extra_plugins: |
             conventional-changelog-conventionalcommits
             @semantic-release/commit-analyzer
