@@ -1,81 +1,37 @@
 {
-	"branches": [
-		"main",
-		{
-			"name": "dev",
-			"channel": "dev",
-			"prerelease": true
-		},
-		{
-			"name": "beta",
-			"channel": "beta",
-			"prerelease": true
-		}
-	],
-	"plugins": [
-		[
-			"@semantic-release/commit-analyzer",
-			{
-				"preset": "conventionalcommits"
-			}
-		],
-		[
-			"@semantic-release/release-notes-generator",
-			{
-				"preset": "conventionalcommits",
-				"presetConfig": {
-					"types": [
-						{
-							"type": "feat",
-							"section": "🚀 Features"
-						},
-						{
-							"type": "fix",
-							"section": "🕵️ Bug Fixes"
-						},
-						{
-							"type": "perf",
-							"section": "💪 Performance Improvements"
-						},
-						{
-							"type": "docs",
-							"section": "🗒️ Documentation",
-							"hidden": true
-						},
-						{
-							"type": "test",
-							"section": "✅ Tests",
-							"hidden": true
-						},
-						{
-							"type": "chore",
-							"section": "🙃 Miscellaneous Chores",
-							"hidden": true
-						}
-					]
-				}
-			}
-		],
-		[
-			"@semantic-release/exec",
-			{
-				"verifyReleaseCmd": "echo ${nextRelease.version} > VERSION"
-			}
-		],
-		[
-			"@semantic-release/changelog",
-			{
-				"changelogFile": "CHANGELOG.md"
-			}
-		],
-		"@semantic-release/github",
-		[
-			"@semantic-release/git",
-			{
-				"assets": [
-					"VERSION"
-				]
-			}
-		]
-	]
+  "branches": [
+    "main",
+    "next",
+    "next-major",
+    {"name": "beta", "prerelease": true},
+    {"name": "alpha", "prerelease": true}
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          {"scope": "no-release", "release": false}
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "writerOpts": {
+          "commitGroupsSort": ["feat"],
+          "commitsSort": ["scope", "subject"]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    "@semantic-release/github"
+  ]
 }
